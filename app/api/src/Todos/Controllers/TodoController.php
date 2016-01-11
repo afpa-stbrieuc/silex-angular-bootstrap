@@ -27,20 +27,22 @@ class TodoController {
 
     public function deleteOneAction($id, Application $app)
     {
-        $todo = $app['doctrine.odm.mongodb.dm']->getRepository('Todos\\Entities\\Todo')->findOneBy(array('id' => $id));
-        $app['doctrine.odm.mongodb.dm']->remove($todo); 
-        $app['doctrine.odm.mongodb.dm']->flush();
+
+        $dm = $app['doctrine.odm.mongodb.dm'];
+        $todo = $dm->getRepository('Todos\\Entities\\Todo')->findOneBy(array('id' => $id));
+        $dm->remove($todo); 
+        $dm->flush();
 
         return new JsonResponse(200);
     }
 
     public function addOneAction(Application $app, Request $request)
     {
-
+        $dm = $app['doctrine.odm.mongodb.dm'];
           $todo = new Todo($request->get("name"));
 
-          $app['doctrine.odm.mongodb.dm']->persist($todo);
-          $app['doctrine.odm.mongodb.dm']->flush();
+          $dm->persist($todo);
+          $dm->flush();
 
         return new JsonResponse($todo, 201);
     }

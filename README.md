@@ -6,7 +6,7 @@
 Sample init TODO project, built with:
   - PHP Silex as the backend. ( use routing with yml config files )
   - AngularJs. for client side
-  - Sqlite for the database.
+  - Mongodb for the database.
   - Grunt for livereloading, build and tests tasks
   - Travis configuration for continuous integration
 
@@ -17,7 +17,7 @@ This app is inspired by `yeoman` angular generator and several projects i don't 
   - [bower](http://bower.io/) ( `npm install -g bower` ) for assets management
   - [php composer](https://getcomposer.org/) for server side php api
   - `grunt-cli` ( `npm install -g grunt-cli`) as the tasks runner
-  - `sqlite` driver and enabled in php.ini
+  - `mongodb` driver and enabled in php.ini
 
 
 ##install
@@ -46,6 +46,6 @@ This app is inspired by `yeoman` angular generator and several projects i don't 
   - download the latest [Release](/releases/latest)
   in the project directory launch the php embedded http server
 ```shell
-  php -S localhost:8000 -t . api/app.php
+  php -S localhost:8000 -t . api/app-dev.php
 ```
 
