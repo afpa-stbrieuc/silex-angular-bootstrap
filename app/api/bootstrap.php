@@ -8,10 +8,11 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Routing\Loader\YamlFileLoader;
 use Symfony\Component\Routing\RouteCollection;
 
+use Neutron\Silex\Provider\MongoDBODMServiceProvider;
+
 
 
 $app = new Silex\Application();
-
 
 
 //load routes from config/routes.yml
@@ -31,16 +32,51 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/log/dev.log',
 ));
 
+//mongo connection
+$app->register(new MongoDBODMServiceProvider(), array(
+    'doctrine.odm.mongodb.connection_options' => array(
+        'database' => 'todos',
 
-$app->register(
-    new Silex\Provider\DoctrineServiceProvider(),
-    array(
-        'db.options' => array(
-            'driver' => 'pdo_sqlite',
-            'path'   => __DIR__ . '/db/app.db.sqlite',
+        // connection string:
+        // mongodb://[username:password@]host1[:port1][,host2[:port2:],...]/db
+        'host'     => 'localhost',
+
+        // connection options as described here:
+        // http://www.php.net/manual/en/mongoclient.construct.php
+        'options'  => array('fsync' => false)
+    ),
+    'doctrine.odm.mongodb.documents'               => array(),
+    'doctrine.odm.mongodb.proxies_dir'             => 'cache/doctrine/odm/mongodb/Proxy',
+    'doctrine.odm.mongodb.proxies_namespace'       => 'DoctrineMongoDBProxy',
+    'doctrine.odm.mongodb.auto_generate_proxies'   => true,
+    'doctrine.odm.mongodb.hydrators_dir'           => 'cache/doctrine/odm/mongodb/Hydrator',
+    'doctrine.odm.mongodb.hydrators_namespace'     => 'DoctrineMongoDBHydrator',
+    'doctrine.odm.mongodb.auto_generate_hydrators' => true,
+    'doctrine.odm.mongodb.metadata_cache'          => new \Doctrine\Common\Cache\ArrayCache(),
+    'doctrine.odm.mongodb.logger_callable'         => $app->protect(function($query) {
+                                                          // log your query
+                                                      }),
+));
+
+//register all entities
+$app->register(new MongoDBODMServiceProvider(), array(
+    // ...
+    'doctrine.odm.mongodb.documents' => array(
+        0 => array(
+            'type' => 'annotation',
+            'path' => array(
+                 'src/Todos/Entities'
+            ),
+            'namespace' => 'Todos\Entities',
+            'alias'     => 'docs',
         ),
-    )
-);
+    ),
+    // ...
+));
+
+
+
+
 
 return $app;
 

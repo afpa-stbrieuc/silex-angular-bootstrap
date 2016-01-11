@@ -3,9 +3,10 @@ env:
 language: php
 php:
 - '5.5'
+services:
+  - mongodb
 before_install:
 - npm install -g bower grunt-cli
-- bower install
 - composer self-update
 install:
 - npm install
