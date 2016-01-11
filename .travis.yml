@@ -5,6 +5,8 @@ php:
 - '5.5'
 services:
   - mongodb
+before_script:
+  phpenv config-add $PHP_DIR/config.ini
 before_install:
 - npm install -g bower grunt-cli
 - composer self-update

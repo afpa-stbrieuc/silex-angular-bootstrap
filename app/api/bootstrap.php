@@ -74,10 +74,6 @@ $app->register(new MongoDBODMServiceProvider(), array(
     // ...
 ));
 
-
-
-
-
 return $app;
 
 //$app->run();
