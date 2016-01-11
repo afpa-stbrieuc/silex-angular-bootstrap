@@ -27,6 +27,12 @@ $app['routes'] = $app->extend(
     }
 );
 
+//serve index as default
+$app->get('/', function () use ($app) {
+    return $app->sendFile(dirname(__DIR__).'/index.html');
+ });
+
+
 //register logger
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/log/dev.log',
