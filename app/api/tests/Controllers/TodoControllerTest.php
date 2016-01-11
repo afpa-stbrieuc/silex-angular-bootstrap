@@ -52,15 +52,15 @@ class TodoTest extends WebTestCase
 
     	$client = $this->createClient();
 
-        $client->request(
-            'POST',
-            '/api/todos/',
-            array('name' => 'kikou')
-        );
-    	// $resp = $client->request('POST', '/api/todos/', array(),
-     //    	array(),
-     //    	array('CONTENT_TYPE' => 'application/json'),
-     //    	'{"name":"kikou"}');
+        // $client->request(
+        //     'POST',
+        //     '/api/todos/',
+        //     array('name' => 'kikou')
+        // );
+    	$resp = $client->request('POST', '/api/todos/', array(),
+        	array(),
+        	array('CONTENT_TYPE' => 'application/json'),
+        	'{"name":"kikou"}');
 
     	$this->assertEquals($client->getResponse()->getStatusCode(), 201);
 
@@ -73,15 +73,15 @@ class TodoTest extends WebTestCase
 
     	//update
 
-    	// $resp = $client->request('PUT', '/api/todos/'.$id, array(),
-     //    	array(),
-     //    	array('CONTENT_TYPE' => 'application/json'),
-     //    	'{"name":"mijo"}');
-        $client->request(
-            'PUT',
-            '/api/todos/'.$id,
-            array('name' => 'mijo')
-        );
+    	$resp = $client->request('PUT', '/api/todos/'.$id, array(),
+        	array(),
+        	array('CONTENT_TYPE' => 'application/json'),
+        	'{"name":"mijo"}');
+        // $client->request(
+        //     'PUT',
+        //     '/api/todos/'.$id,
+        //     array('name' => 'mijo')
+        // );
 
     	$this->assertEquals($client->getResponse()->getStatusCode(), 200);
 

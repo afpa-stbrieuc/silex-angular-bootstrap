@@ -39,7 +39,8 @@ class TodoController {
     public function addOneAction(Application $app, Request $request)
     {
         $dm = $app['doctrine.odm.mongodb.dm'];
-          $todo = new Todo($request->get("name"));
+        $payload = json_decode($request->getContent());
+        $todo = new Todo($payload->name);
 
           $dm->persist($todo);
           $dm->flush();
@@ -52,8 +53,9 @@ class TodoController {
 
         $dm = $app['doctrine.odm.mongodb.dm'];
         $todo = $dm->getRepository('Todos\\Entities\\Todo')->findOneBy(array('id' => $id));
+        $payload = json_decode($request->getContent());
 
-        $todo->setName($request->get("name"));
+        $todo->setName($payload->name);
         $dm->flush($todo);
 
 
