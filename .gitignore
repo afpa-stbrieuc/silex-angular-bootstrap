@@ -7,6 +7,3 @@ release.zip
 dist
 app/cache
 app/api/cache
-app/api/cache git rm app/api/cache/.
-app/api/cache git rm app/api/cache/*
-cache
