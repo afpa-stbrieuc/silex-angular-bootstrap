@@ -12,7 +12,6 @@ class TodoController {
 
 
 
-
     public function getAllAction(Application $app)
     {
         return new JsonResponse($app['doctrine.odm.mongodb.dm']->getRepository('Todos\\Entities\\Todo')->findAll());

@@ -1,7 +1,8 @@
 <?php
+//TODO use config file
+$dbName = 'todos';
 
-
-$app = require __DIR__.'/bootstrap.php';
+$app = require __DIR__.'/config-init.php';
 $app['debug'] = true;
 
 

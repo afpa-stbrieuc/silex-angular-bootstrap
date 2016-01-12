@@ -14,9 +14,13 @@ class TodoTest extends WebTestCase
 	public function createApplication()
     {
         
-		$app = require __DIR__.'/../../bootstrap.php';
+        $dbName = 'todos-test';
+
+		$app = require __DIR__.'/../../config-init.php';
 
 		$app['debug'] = true;
+
+
 		// Generate raw exceptions instead of HTML pages if errors occur
 		$app['exception_handler']->disable();
 

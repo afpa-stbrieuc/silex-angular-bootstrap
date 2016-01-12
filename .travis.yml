@@ -1,5 +1,5 @@
 env:
-- PHP_DIR=app/api/
+- PHP_DIR=app/api
 language: php
 php:
 - '5.5'
