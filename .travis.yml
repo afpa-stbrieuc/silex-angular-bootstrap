@@ -2,12 +2,11 @@ env:
 - PHP_DIR=app/api
 language: php
 php:
-- '5.5'
+- '5.6'
 services:
   - mongodb
-before_script:
-  phpenv config-add $PHP_DIR/config.ini
 before_install:
+- phpenv config-add $PHP_DIR/config.ini
 - npm install -g bower grunt-cli
 - composer self-update
 install:
