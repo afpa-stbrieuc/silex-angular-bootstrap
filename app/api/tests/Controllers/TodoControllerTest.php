@@ -14,27 +14,15 @@ class TodoTest extends WebTestCase
 	public function createApplication()
     {
         
-		$app = require __DIR__.'/../../bootstrap.php';
+        $dbName = 'todos-test';
+
+		$app = require __DIR__.'/../../config-init.php';
 
 		$app['debug'] = true;
+
+
 		// Generate raw exceptions instead of HTML pages if errors occur
 		$app['exception_handler']->disable();
-		// Enable anonymous access to admin zone
-		//$app['security.access_rules'] = array();
-
-    	//overwrite default 
-  //   	$app->register(new Silex\Provider\DoctrineServiceProvider(),
-		// 	    array(
-		// 	        'db.options' => array(
-		// 	            'driver' => 'pdo_sqlite',
-		// 	            'path'   => __DIR__ . '/../../db/app-test.db.sqlite',
-		// 	        ),
-		// 	    )
-		// );
-
-		// $app['db']->executeUpdate(file_get_contents(__DIR__ . '/../db/db.sql'));
-
-
 
 		return $app;
 
@@ -67,6 +55,12 @@ class TodoTest extends WebTestCase
 
 
     	$client = $this->createClient();
+
+        // $client->request(
+        //     'POST',
+        //     '/api/todos/',
+        //     array('name' => 'kikou')
+        // );
     	$resp = $client->request('POST', '/api/todos/', array(),
         	array(),
         	array('CONTENT_TYPE' => 'application/json'),
@@ -87,6 +81,11 @@ class TodoTest extends WebTestCase
         	array(),
         	array('CONTENT_TYPE' => 'application/json'),
         	'{"name":"mijo"}');
+        // $client->request(
+        //     'PUT',
+        //     '/api/todos/'.$id,
+        //     array('name' => 'mijo')
+        // );
 
     	$this->assertEquals($client->getResponse()->getStatusCode(), 200);
 
