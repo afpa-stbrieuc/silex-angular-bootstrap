@@ -43,7 +43,7 @@ This app is inspired by `yeoman` angular generator and several projects i don't 
 ```
 
 ##launch from release
-  - download the latest [Release](/releases/latest)
+  - download the latest [Release](https://github.com/afpa-stbrieuc/silex-angular-bootstrap/releases/latest)
   in the project directory launch the php embedded http server
 ```shell
   php -S localhost:8000 -t . api/app-dev.php
